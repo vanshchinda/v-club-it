@@ -12,6 +12,8 @@ import { Gear } from "resources/icon/Gear.jsx";
 import { SignOut } from "resources/icon/SignOut.jsx";
 
 import { NavContext } from "context";
+import { getAuth, signOut } from "firebase/auth";
+import { FirebaseContext } from "features/firebase/firebase.context";
 
 const NavButton = ({ pageKey, ButtonComp, type, action, linkTo }) => {
   const { activePage, setactivePage } = useContext(NavContext);
@@ -31,6 +33,7 @@ const NavButton = ({ pageKey, ButtonComp, type, action, linkTo }) => {
         alignItems={"center"}
         onClick={() => {
           setactivePage(pageKey);
+          action();
         }}
         sx={{
           backgroundColor: buttonOpen ? "#F1F9FA" : "none",
@@ -55,6 +58,19 @@ const NavButton = ({ pageKey, ButtonComp, type, action, linkTo }) => {
 };
 
 export const Nav = () => {
+  const auth = getAuth();
+
+  const { setuserInfo } = useContext(FirebaseContext);
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        setuserInfo({});
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
   return (
     <Box
       sx={{
@@ -73,35 +89,35 @@ export const Nav = () => {
             pageKey={0}
             ButtonComp={HomeButton}
             type={"Home"}
-            action={() => console.log("CLicked")}
+            action={() => {}}
             linkTo={"/"}
           />
           <NavButton
             pageKey={1}
             ButtonComp={ThumbsUp}
             type={"Recommended"}
-            action={() => console.log("CLicked")}
+            action={() => {}}
             linkTo={"/Recommended"}
           />
           <NavButton
             pageKey={2}
             ButtonComp={CalendarBlank}
             type={"Registered"}
-            action={() => console.log("CLicked")}
+            action={() => {}}
             linkTo={"/Registered"}
           />
           <NavButton
             pageKey={3}
             ButtonComp={Gear}
             type={"Settings"}
-            action={() => console.log("CLicked")}
+            action={() => {}}
             linkTo={"/Settings"}
           />
           <NavButton
             pageKey={4}
             ButtonComp={SignOut}
             type={"Logout"}
-            action={() => console.log("Logout")}
+            action={handleSignOut}
             linkTo={"/"}
           />
         </Stack>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 // * components
 import { Home } from "pages/Home/Home";
@@ -8,36 +8,35 @@ import { Settings } from "pages/Settings";
 import { Auth } from "pages/Auth";
 
 // * contexts
-import { FirebaseContextProvider } from "features/firebase/firebase.context";
-import { NavContextProvider, UserContextProvider } from "context";
+import {
+  FirebaseContext,
+  FirebaseContextProvider,
+} from "features/firebase/firebase.context";
+import { NavContextProvider, UserContextProvider, UserContext } from "context";
 
 // * react-router-dom
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  let loggedIn = true;
+  const { userInfo } = useContext(UserContext);
+  let loggedIn = userInfo.displayName ? true : false;
+
   return (
     <>
-      <FirebaseContextProvider>
-        <UserContextProvider>
-          <NavContextProvider>
-            <BrowserRouter>
-              {loggedIn ? (
-                <Routes>
-                  <Route path="/" element={<Auth />} />
-                </Routes>
-              ) : (
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/Recommended" element={<Recommended />} />
-                  <Route path="/Registered" element={<Registered />} />
-                  <Route path="/Settings" element={<Settings />} />
-                </Routes>
-              )}
-            </BrowserRouter>
-          </NavContextProvider>
-        </UserContextProvider>
-      </FirebaseContextProvider>
+      <BrowserRouter>
+        {loggedIn ? (
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Recommended" element={<Recommended />} />
+            <Route path="/Registered" element={<Registered />} />
+            <Route path="/Settings" element={<Settings />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/" element={<Auth />} />
+          </Routes>
+        )}
+      </BrowserRouter>
     </>
   );
 }
