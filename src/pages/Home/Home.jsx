@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 // * components
 import { Nav } from "component/Nav";
 import { Background } from "component/Background";
-// import { CardMain } from "component/CardMain";
+import { CardMain } from "component/CardMain";
 
 // * contexts
 import { FirebaseContext } from "features/firebase/firebase.context";
@@ -18,8 +18,16 @@ export const Home = () => {
   return (
     <Container maxWidth="lg">
       <Nav />
-      <button onClick={() => login()}>Login</button>
-      {/* <CardMain /> */}
+      <CardMain
+        title={"Get Started With UI/UX"}
+        clubName={"Daily Design Club"}
+        description={
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet, consectetur orci gravida feugiat sed senectus quam enim..."
+        }
+        date={"21/03/22"}
+        location={"SJT 828"}
+        time={"13 : 30"}
+      />
       <Background />
     </Container>
   );

@@ -1,9 +1,9 @@
 export const firebaseConfig = {
   apiKey: process.env.REACT_APP_Firebase_apiKey,
-  authDomain: process.env.REACT_APP_Firebase_authDomain,
-  projectId: process.env.REACT_APP_Firebase_projectId,
-  storageBucket: process.env.REACT_APP_Firebase_storageBucket,
-  messagingSenderId: process.env.REACT_APP_Firebase_messageSenderId,
-  appId: process.env.REACT_APP_Firebase_appId,
-  measurementId: process.env.REACT_APP_Firebase_measureId,
+  appId: "1:692375782431:web:99097c2ab0960133e8012a",
+  authDomain: "v-club-it.firebaseapp.com",
+  projectId: "v-club-it",
+  messagingSenderId: process.env.REACT_APP_Firebase_messagingSenderId,
+  measurementId: process.env.REACT_APP_Firebase_measurementId,
+  storageBucket: "v-club-it.appspot.com",
 };

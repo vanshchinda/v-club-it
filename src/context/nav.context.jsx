@@ -4,7 +4,8 @@ import React, { useState, createContext } from "react";
 export const NavContext = createContext();
 
 export const NavContextProvider = ({ children }) => {
-  const [activePage, setactivePage] = useState(null);
+  const [activePage, setactivePage] = useState(0);
+
   return (
     <NavContext.Provider
       value={{ activePage: activePage, setactivePage: setactivePage }}

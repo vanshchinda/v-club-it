@@ -5,7 +5,7 @@ import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./firebaseconfig";
 
 // ! Temp
-import { getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 export const app = initializeApp(firebaseConfig);
 
@@ -16,7 +16,7 @@ var provider = new GoogleAuthProvider();
 
 // signInWithPopup(auth, provider);
 const login = () => {
-  signInWithRedirect(auth, provider);
+  signInWithPopup(auth, provider);
 };
 
 export const FirebaseContext = createContext();

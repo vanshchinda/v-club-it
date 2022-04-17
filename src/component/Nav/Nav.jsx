@@ -58,7 +58,7 @@ export const Nav = () => {
   return (
     <Box
       sx={{
-        height: "300px",
+        height: "15vh",
         padding: "50px 10px",
       }}
     >
