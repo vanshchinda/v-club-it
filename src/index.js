@@ -3,18 +3,35 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 
-import { FirebaseContextProvider } from "features/firebase/firebase.context";
-import { NavContextProvider, UserContextProvider } from "context";
+// * contexts
+import {
+  FirebaseContextProvider,
+  FirestoreContextProvider,
+} from "features/firebase";
+import {
+  NavContextProvider,
+  UserContextProvider,
+  EventsContextProvider,
+} from "context";
 
-ReactDOM.render(
+const container = document.getElementById("root");
+
+// create a root
+const root = ReactDOM.createRoot(container);
+
+//render app to root
+root.render(
   <React.StrictMode>
     <FirebaseContextProvider>
-      <UserContextProvider>
-        <NavContextProvider>
-          <App />
-        </NavContextProvider>
-      </UserContextProvider>
+      <FirestoreContextProvider>
+        <UserContextProvider>
+          <EventsContextProvider>
+            <NavContextProvider>
+              <App />
+            </NavContextProvider>
+          </EventsContextProvider>
+        </UserContextProvider>
+      </FirestoreContextProvider>
     </FirebaseContextProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );

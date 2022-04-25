@@ -6,37 +6,48 @@ import { Recommended } from "pages/Recommended";
 import { Registered } from "pages/Registered";
 import { Settings } from "pages/Settings";
 import { Auth } from "pages/Auth";
+import { CreateEvent } from "pages/CreateEvent";
 
 // * contexts
-import {
-  FirebaseContext,
-  FirebaseContextProvider,
-} from "features/firebase/firebase.context";
-import { NavContextProvider, UserContextProvider, UserContext } from "context";
+import { UserContext } from "context";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 // * react-router-dom
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const { userInfo } = useContext(UserContext);
-  let loggedIn = userInfo.displayName ? true : false;
+  const { user } = useContext(UserContext);
+  // let loggedIn = user.displayName ? true : false;
+  let loggedIn = true;
+
+  const theme = createTheme({
+    palette: {
+      mode: "dark",
+      primary: {
+        main: "#08141B",
+      },
+    },
+  });
 
   return (
     <>
-      <BrowserRouter>
-        {loggedIn ? (
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Recommended" element={<Recommended />} />
-            <Route path="/Registered" element={<Registered />} />
-            <Route path="/Settings" element={<Settings />} />
-          </Routes>
-        ) : (
-          <Routes>
-            <Route path="/" element={<Auth />} />
-          </Routes>
-        )}
-      </BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          {loggedIn ? (
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/recommended" element={<Recommended />} />
+              <Route path="/registered" element={<Registered />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/create" element={<CreateEvent />} />
+            </Routes>
+          ) : (
+            <Routes>
+              <Route path="/" element={<Auth />} />
+            </Routes>
+          )}
+        </BrowserRouter>
+      </ThemeProvider>
     </>
   );
 }

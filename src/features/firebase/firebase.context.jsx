@@ -1,18 +1,21 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 // * Firebase
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./firebaseconfig";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 export const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 var provider = new GoogleAuthProvider();
 
+const db = getFirestore(app);
+
 export const FirebaseContext = createContext();
 
 export const FirebaseContextProvider = ({ children }) => {
-  const [userInfo, setuserInfo] = useState({});
+  const [user, setuser] = useState({});
 
   const login = () => {
     signInWithPopup(auth, provider)
@@ -22,10 +25,7 @@ export const FirebaseContextProvider = ({ children }) => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-
-        setuserInfo(user);
-
-        console.log(user);
+        setuser(user);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -41,7 +41,12 @@ export const FirebaseContextProvider = ({ children }) => {
 
   return (
     <FirebaseContext.Provider
-      value={{ login: login, userInfo: userInfo, setuserInfo: setuserInfo }}
+      value={{
+        login: login,
+        user: user,
+        setuser: setuser,
+        db: db,
+      }}
     >
       {children}
     </FirebaseContext.Provider>

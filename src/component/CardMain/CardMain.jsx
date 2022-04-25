@@ -11,6 +11,8 @@ import {
   Dialog,
 } from "@mui/material";
 
+import { CardDialogBox } from "./CardDialogBox";
+
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
@@ -19,22 +21,6 @@ import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 import tempcardImage from "resources/temp/tempcardImage.png";
-
-export const CardDialogBox = ({ open, setOpen }) => {
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  return (
-    <>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
-      ></Dialog>
-    </>
-  );
-};
 
 export const CardMain = (props) => {
   const [open, setOpen] = React.useState(false);

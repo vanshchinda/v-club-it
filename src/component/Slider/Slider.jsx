@@ -37,11 +37,12 @@ export const Slider = ({ cardData }) => {
           loopFillGroupWithBlank={true}
           modules={[Navigation]}
         >
-          {cardData.map((card) => {
+          {cardData.map((cardD, key) => {
+            const card = cardD.data();
             return (
-              <SwiperSlide>
+              <SwiperSlide key={key}>
                 <CardMain
-                  title={card.title}
+                  title={card.name}
                   clubName={card.clubName}
                   description={card.description}
                   date={card.date}

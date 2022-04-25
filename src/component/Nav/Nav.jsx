@@ -10,6 +10,7 @@ import { ThumbsUp } from "resources/icon/ThumbsUp.jsx";
 import { CalendarBlank } from "resources/icon/CalendarBlank.jsx";
 import { Gear } from "resources/icon/Gear.jsx";
 import { SignOut } from "resources/icon/SignOut.jsx";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
 import { NavContext } from "context";
 import { getAuth, signOut } from "firebase/auth";
@@ -84,6 +85,9 @@ export const Nav = () => {
         justifyContent={"flex-end"}
         spacing={4}
       >
+        <Link to={"/Create"}>
+          <AddRoundedIcon color="white" />
+        </Link>
         <Stack direction={"row"} alignItems="center">
           <NavButton
             pageKey={0}
