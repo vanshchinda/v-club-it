@@ -23,16 +23,16 @@ export const FirestoreContextProvider = ({ children }) => {
   async function getEvents() {
     const events = await getDocs(eventsRef);
     seteventsData(events.docs);
+    setloading(false);
     return events;
   }
 
   useEffect(() => {
     try {
       getEvents();
-      setTimeout(() => {
-        console.log(eventsData);
-        setloading(false);
-      }, 2300);
+      // setTimeout(() => {
+      //   setloading(false);
+      // }, 230);
     } catch (e) {
       console.log(e);
     }
@@ -48,6 +48,7 @@ export const FirestoreContextProvider = ({ children }) => {
     <FirestoreContext.Provider
       value={{
         eventsData: eventsData,
+        seteventsData: seteventsData,
         addEventDoc: addEventDoc,
         loading: loading,
       }}

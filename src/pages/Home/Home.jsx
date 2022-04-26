@@ -19,10 +19,8 @@ export const Home = () => {
   const { eventsData, loading } = useContext(EventsContext);
 
   useEffect(() => {
-    console.log(eventsData);
-
     return () => {};
-  }, [eventsData]);
+  }, [eventsData, loading]);
 
   return (
     <>
