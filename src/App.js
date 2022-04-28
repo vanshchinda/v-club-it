@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 // * components
 import { Home } from "pages/Home/Home";
@@ -9,29 +9,25 @@ import { Auth } from "pages/Auth";
 import { CreateEvent } from "pages/CreateEvent";
 
 // * contexts
-import { UserContext } from "context";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { UserContext, ThemeContextProvider } from "context";
 
 // * react-router-dom
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const { user } = useContext(UserContext);
-  // let loggedIn = user.displayName ? true : false;
-  let loggedIn = true;
+  let loggedIn = user.displayName ? true : false;
 
-  const theme = createTheme({
-    palette: {
-      mode: "dark",
-      primary: {
-        main: "#08141B",
-      },
-    },
-  });
+  useEffect(() => {
+    document.cookie = {
+      name: "google",
+    };
+    console.log(document.cookie.name);
+  }, []);
 
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <ThemeContextProvider>
         <BrowserRouter>
           {loggedIn ? (
             <Routes>
@@ -47,7 +43,7 @@ function App() {
             </Routes>
           )}
         </BrowserRouter>
-      </ThemeProvider>
+      </ThemeContextProvider>
     </>
   );
 }
